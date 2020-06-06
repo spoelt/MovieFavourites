@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/movieOverviewFragment"
-        android:name="com.spoelt.moviefavourites.MovieOverviewFragment"
+        android:name="com.spoelt.moviefavourites.ui.fragments.MovieOverviewFragment"
         android:label="fragment_movie_overview"
         tools:layout="@layout/fragment_movie_overview" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteMoviesFragment"
-        android:name="com.spoelt.moviefavourites.FavouriteMoviesFragment"
+        android:name="com.spoelt.moviefavourites.ui.fragments.FavouriteMoviesFragment"
         android:label="fragment_favourite_movies"
         tools:layout="@layout/fragment_favourite_movies" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.spoelt.moviefavourites.MovieDetailsFragment"
+        android:name="com.spoelt.moviefavourites.ui.fragments.MovieDetailsFragment"
         android:label="fragment_movie_details"
         tools:layout="@layout/fragment_movie_details" />
 </navigation>

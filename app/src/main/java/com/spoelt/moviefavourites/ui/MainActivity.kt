@@ -1,9 +1,10 @@
-package com.spoelt.moviefavourites
+package com.spoelt.moviefavourites.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.spoelt.moviefavourites.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
