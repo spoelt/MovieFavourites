@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.spoelt.moviefavourites.R
+import com.spoelt.moviefavourites.constants.DASH
 import com.spoelt.moviefavourites.data.model.Movie
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
@@ -26,7 +27,7 @@ class MovieAdapter(private val clickListener: ClickListener) : RecyclerView.Adap
 
         fun bind(movie: Movie){
             textViewMovieTitle.text = movie.original_title
-            textViewReleaseYear.text = movie.release_date.substringBefore("-")
+            textViewReleaseYear.text = movie.release_date.substringBefore(DASH)
             Picasso.get()
                 .load("https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}")
                 .memoryPolicy(MemoryPolicy.NO_CACHE)

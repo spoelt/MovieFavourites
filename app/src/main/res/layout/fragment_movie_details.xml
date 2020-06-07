@@ -1,14 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.MovieDetailsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="" />
+        android:padding="@dimen/padding"
+        android:scrollbars="vertical"
+        tools:context=".ui.fragments.MovieDetailsFragment">
 
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/moviePosterDetail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_height_detail"
+            android:layout_marginStart="@dimen/margin_start_end"
+            android:layout_marginEnd="@dimen/margin_start_end"
+            android:contentDescription="@string/image_description_poster"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/movieTitleDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start_end"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_marginEnd="@dimen/margin_start_end"
+            android:text=""
+            android:textSize="@dimen/header"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/moviePosterDetail"
+            tools:text="The Dark Knight" />
+
+        <TextView
+            android:id="@+id/movieReleaseDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start_end"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_marginEnd="@dimen/margin_start_end"
+            android:text=""
+            android:textSize="@dimen/subheader"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieTitleDetail"
+            tools:text="1920" />
+
+        <TextView
+            android:id="@+id/voteAverage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start_end"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_start_end"
+            android:text=""
+            android:textSize="@dimen/subheader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieReleaseDetail"
+            tools:text="7.6" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/star_sizes"
+            android:layout_height="@dimen/star_sizes"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:contentDescription="@string/image_description_poster"
+            android:src="@drawable/ic_star_bright_24dp"
+            app:layout_constraintEnd_toStartOf="@id/voteAverage"
+            app:layout_constraintTop_toBottomOf="@id/movieReleaseDetail"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/movieOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start_end"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_start_end"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/voteAverage"
+            tools:text="Movie Overview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
