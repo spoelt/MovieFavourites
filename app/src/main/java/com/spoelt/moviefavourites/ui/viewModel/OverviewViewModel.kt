@@ -80,8 +80,7 @@ class OverviewViewModel : ViewModel() {
         errorMessage.value = ""
     }
 
-    fun displayMovieDetails(movie: Movie) {
-
+    fun refreshMovies() {
+        getMovies()
     }
-
 }

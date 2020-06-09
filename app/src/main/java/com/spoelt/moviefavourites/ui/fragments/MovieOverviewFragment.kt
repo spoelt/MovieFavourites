@@ -4,7 +4,10 @@ package com.spoelt.moviefavourites.ui.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,16 +23,19 @@ import com.spoelt.moviefavourites.ui.viewModel.OverviewViewModel
 class MovieOverviewFragment : Fragment() {
     private lateinit var viewModel: OverviewViewModel
     private lateinit var movieAdapter: MovieAdapter
+    private lateinit var binding: FragmentMovieOverviewBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentMovieOverviewBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_overview, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_overview, container, false)
 
         viewModel = ViewModelProvider(this).get(OverviewViewModel::class.java)
 
         binding.lifecycleOwner = this
+
+        binding.viewModel = viewModel
 
         movieAdapter = MovieAdapter { movie ->
             val bundle = Bundle()
@@ -51,16 +57,25 @@ class MovieOverviewFragment : Fragment() {
             }
         })
 
-        /*viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if (it.isNotEmpty()) {
-                   // showErrorView(it)
-                } else {
-                   // hideErrorView()
-                }
+                toggleErrorView(it)
             }
-        })*/
+        })
 
         return binding.root
+    }
+
+    private fun toggleErrorView(message: String) {
+        if (message.isEmpty()) {
+            binding.errorMessage.visibility = GONE
+            binding.refresh.hide()
+            binding.swipeLayout.visibility = VISIBLE
+        } else {
+            binding.errorMessage.visibility = VISIBLE
+            binding.errorMessage.text = message
+            binding.refresh.show()
+            binding.swipeLayout.visibility = GONE
+        }
     }
 }

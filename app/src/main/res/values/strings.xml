@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Movie Favourites</string>
     <string name="image_description_poster">Movie Poster</string>
+    <string name="tmdb_notice">This product uses the TMDb API but is not endorsed or certified by TMDb.</string>
 </resources>
