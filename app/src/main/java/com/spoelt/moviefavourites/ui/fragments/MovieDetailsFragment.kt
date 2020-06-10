@@ -35,9 +35,12 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun displayMovieDetails(movie: Movie) {
-        binding.movieTitleDetail.text = movie.original_title
+        binding.movieTitleDetail.text = resources.getString(
+            R.string.movie_header,
+            movie.original_title,
+            movie.release_date.substringBefore(DASH)
+        )
         binding.movieOverview.text = movie.overview
-        binding.movieReleaseDetail.text = movie.release_date.substringBefore(DASH)
         binding.voteAverage.text = movie.vote_average.toString()
         Picasso.get()
             .load("https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}")

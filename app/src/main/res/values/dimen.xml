@@ -4,9 +4,13 @@
     <dimen name="margin_top">4dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="padding">12dp</dimen>
+    <dimen name="padding_start_end">24dp</dimen>
     <dimen name="image_height">200dp</dimen>
-    <dimen name="image_height_detail">350dp</dimen>
+    <dimen name="image_height_detail">300dp</dimen>
     <dimen name="header">20sp</dimen>
     <dimen name="subheader">16sp</dimen>
     <dimen name="star_sizes">24dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="logo_height">24dp</dimen>
+    <dimen name="logo_width">50dp</dimen>
 </resources>

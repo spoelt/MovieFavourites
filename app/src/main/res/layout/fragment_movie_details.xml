@@ -36,79 +36,78 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/moviePosterDetail"
-            tools:text="The Dark Knight" />
-
-        <TextView
-            android:id="@+id/movieReleaseDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_start_end"
-            android:layout_marginTop="@dimen/margin_top"
-            android:layout_marginEnd="@dimen/margin_start_end"
-            android:text=""
-            android:textSize="@dimen/subheader"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movieTitleDetail"
-            tools:text="1920" />
+            tools:text="The Dark Knight (1920)" />
 
         <TextView
             android:id="@+id/voteAverage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start_end"
-            android:layout_marginTop="@dimen/margin_16dp"
             android:layout_marginEnd="@dimen/margin_start_end"
             android:text=""
             android:textSize="@dimen/subheader"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movieReleaseDetail"
+            app:layout_constraintTop_toBottomOf="@id/movieTitleDetail"
             tools:text="7.6" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView"
             android:layout_width="@dimen/star_sizes"
             android:layout_height="@dimen/star_sizes"
-            android:layout_marginTop="@dimen/margin_16dp"
             android:contentDescription="@string/image_description_poster"
             android:src="@drawable/ic_star_bright_24dp"
             app:layout_constraintEnd_toStartOf="@id/voteAverage"
-            app:layout_constraintTop_toBottomOf="@id/movieReleaseDetail"
+            app:layout_constraintTop_toBottomOf="@id/movieTitleDetail"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/movieOverview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_start_end"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:layout_marginEnd="@dimen/margin_start_end"
+            android:paddingStart="@dimen/padding_start_end"
+            android:paddingTop="@dimen/padding"
+            android:paddingEnd="@dimen/padding_start_end"
             android:text=""
+            app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/voteAverage"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
             tools:text="Movie Overview" />
 
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginStart="@dimen/margin_start_end"
+            android:layout_marginEnd="@dimen/margin_start_end"
+            android:background="@color/colorBlack"
+            app:layout_constraintBottom_toTopOf="@+id/tmdbLogo"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/tmdb_logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/tmdbLogo"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
             android:contentDescription="@string/image_description_poster"
             android:src="@drawable/tmdb_logo"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tmdbNoticeDetail"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/tmdb_notice"
+            android:id="@+id/tmdbNoticeDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_start_end"
+            android:paddingStart="@dimen/padding_start_end"
+            android:paddingEnd="@dimen/padding_start_end"
             android:text="@string/tmdb_notice"
             android:textAlignment="center"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
