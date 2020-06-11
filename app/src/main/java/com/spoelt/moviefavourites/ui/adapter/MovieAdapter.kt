@@ -18,6 +18,11 @@ typealias ClickListener = (Movie) -> Unit
 
 class MovieAdapter(private val clickListener: ClickListener) : RecyclerView.Adapter<MovieAdapter.MoviesViewHolder>() {
     private var movieList: List<Movie> = ArrayList()
+    private lateinit var onBottomReachedListener: OnBottomReachedListener
+
+    fun setOnBottomReachedListener(listener: OnBottomReachedListener) {
+        onBottomReachedListener = listener
+    }
 
     class MoviesViewHolder(itemView: View, private val clickListener: ClickListener) :
         RecyclerView.ViewHolder(itemView) {
@@ -52,10 +57,19 @@ class MovieAdapter(private val clickListener: ClickListener) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         holder.bind(movieList[position])
+
+        if (position == movieList.size - 1) {
+            onBottomReachedListener.onBottomReached(position)
+        }
     }
 
     fun updateList(updatedList: List<Movie>) {
         movieList = updatedList
         notifyDataSetChanged()
+        notifyItemRangeChanged(0, itemCount)
     }
+}
+
+interface OnBottomReachedListener {
+    fun onBottomReached(position: Int)
 }

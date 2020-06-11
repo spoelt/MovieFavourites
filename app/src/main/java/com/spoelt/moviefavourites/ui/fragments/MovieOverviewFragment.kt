@@ -7,7 +7,6 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,12 +17,15 @@ import com.spoelt.moviefavourites.R
 import com.spoelt.moviefavourites.constants.MOVIE_KEY
 import com.spoelt.moviefavourites.databinding.FragmentMovieOverviewBinding
 import com.spoelt.moviefavourites.ui.adapter.MovieAdapter
+import com.spoelt.moviefavourites.ui.adapter.OnBottomReachedListener
 import com.spoelt.moviefavourites.ui.viewModel.OverviewViewModel
+
 
 class MovieOverviewFragment : Fragment() {
     private lateinit var viewModel: OverviewViewModel
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var binding: FragmentMovieOverviewBinding
+    private var reloadingNeeded = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,17 +45,28 @@ class MovieOverviewFragment : Fragment() {
             findNavController().navigate(R.id.movieDetailsFragment, bundle)
         }
 
+        movieAdapter.setOnBottomReachedListener(object : OnBottomReachedListener {
+            override fun onBottomReached(position: Int) {
+                if (reloadingNeeded) {
+                    viewModel.loadNewMovies()
+                    reloadingNeeded = false
+                }
+            }
+        })
+
         binding.movieOverviewRecyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.movieOverviewRecyclerView.adapter = movieAdapter
 
         binding.swipeLayout.setOnRefreshListener {
             viewModel.getMovies()
             binding.swipeLayout.isRefreshing = false
+            reloadingNeeded = true
         }
 
         viewModel.movieList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 movieAdapter.updateList(it)
+                reloadingNeeded = true
             }
         })
 

@@ -11,7 +11,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding"
+            android:paddingTop="@dimen/padding"
+            android:paddingBottom="@dimen/padding"
             android:scrollbars="vertical"
             tools:context=".ui.fragments.MovieDetailsFragment">
 
@@ -76,7 +77,6 @@
                 android:paddingEnd="@dimen/padding_start_end"
                 android:paddingBottom="@dimen/padding"
                 android:text=""
-                app:layout_constraintBottom_toTopOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
@@ -86,9 +86,11 @@
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/divider_height"
+                android:layout_marginTop="@dimen/margin_16dp"
                 android:layout_marginStart="@dimen/margin_start_end"
                 android:layout_marginEnd="@dimen/margin_start_end"
                 android:background="@color/colorBlack"
+                app:layout_constraintTop_toBottomOf="@id/movieOverview"
                 app:layout_constraintBottom_toTopOf="@+id/tmdbLogo"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -98,7 +100,7 @@
                 android:layout_height="@dimen/logo_height"
                 android:contentDescription="@string/image_description_poster"
                 android:src="@drawable/tmdb_logo"
-                app:layout_constraintBottom_toTopOf="@+id/tmdbNoticeDetail"
+                app:layout_constraintTop_toBottomOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -112,7 +114,7 @@
                 android:text="@string/tmdb_notice"
                 android:textAlignment="center"
                 android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tmdbLogo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 

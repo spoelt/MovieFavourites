@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.spoelt.moviefavourites.constants.MAX_NUM_PAGES
 import com.spoelt.moviefavourites.data.model.JsonResponse
 import com.spoelt.moviefavourites.data.model.Movie
 import com.spoelt.moviefavourites.data.network.ApiClient
@@ -14,6 +15,7 @@ import java.io.IOException
 
 class OverviewViewModel : ViewModel() {
     private val apiService = ApiClient().getClient().create(ApiService::class.java)
+    private var page = 1
     var errorMessage: MutableLiveData<String> = MutableLiveData()
     var movieList: MutableLiveData<MutableList<Movie>> = MutableLiveData()
 
@@ -31,7 +33,7 @@ class OverviewViewModel : ViewModel() {
 
     private suspend fun fetchPopularMovies(): NetworkState {
         return try {
-            val response = apiService.getPopularMovies()
+            val response = apiService.getPopularMovies(page = page)
             if (response.isSuccessful) {
                 NetworkState.Success(response.body()!!)
             } else {
@@ -76,11 +78,26 @@ class OverviewViewModel : ViewModel() {
             list.add(d)
         }
 
-        movieList.value = list
+        if (page == 1) {
+            movieList.value = list
+        } else {
+            movieList.value?.addAll(list)
+        }
+
         errorMessage.value = ""
+
+        when (page) {
+            MAX_NUM_PAGES -> page = 1
+            else -> page += 1
+        }
     }
 
     fun refreshMovies() {
+        page = 1
+        getMovies()
+    }
+
+    fun loadNewMovies() {
         getMovies()
     }
 }

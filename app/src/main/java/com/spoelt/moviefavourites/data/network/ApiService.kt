@@ -8,5 +8,8 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("movie/popular")
-    suspend fun getPopularMovies(@Query("api_key") key: String = BuildConfig.API_KEY): Response<JsonResponse>
+    suspend fun getPopularMovies(
+        @Query("api_key") key: String = BuildConfig.API_KEY,
+        @Query("page") page: Int
+    ): Response<JsonResponse>
 }

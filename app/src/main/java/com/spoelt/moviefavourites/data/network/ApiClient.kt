@@ -1,8 +1,6 @@
 package com.spoelt.moviefavourites.data.network
 
-import com.spoelt.moviefavourites.BuildConfig
 import com.spoelt.moviefavourites.data.network.ApiEndpoints.BASE_URL
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,7 +19,6 @@ class ApiClient {
     private var retrofit: Retrofit? = null
 
     fun getClient(): Retrofit {
-
         val okhttpBuilder = okHttpClient()
         when (retrofit) {
             null -> retrofit = Retrofit.Builder()
