@@ -1,5 +1,5 @@
 # MovieFavourites
-Android App that displays the most popular movies on TMDB and shows users a detailed description of each movie. Uses the TMBD API (https://www.themoviedb.org/) to display the data but is neither endorsed nor certified by TMDB.
+Android App that displays the most popular movies on TMDB and shows users a detailed description of each movie. Uses the TMDB API (https://www.themoviedb.org/) to display the data but is neither endorsed nor certified by TMDB.
 
 Concepts/Topics Learned:
 * SwipeLayout + GridLayout
