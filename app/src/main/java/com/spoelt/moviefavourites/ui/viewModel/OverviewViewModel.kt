@@ -28,7 +28,6 @@ class OverviewViewModel : ViewModel() {
             val moviesResult = fetchPopularMovies()
             handleResult(moviesResult)
         }
-
     }
 
     private suspend fun fetchPopularMovies(): NetworkState {
@@ -81,7 +80,9 @@ class OverviewViewModel : ViewModel() {
         if (page == 1) {
             movieList.value = list
         } else {
-            movieList.value?.addAll(list)
+            val existingMovies = movieList.value as ArrayList<Movie>
+            existingMovies.addAll(list)
+            movieList.value = existingMovies
         }
 
         errorMessage.value = ""

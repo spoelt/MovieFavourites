@@ -31,7 +31,8 @@ class MovieOverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_overview, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_movie_overview, container, false)
 
         viewModel = ViewModelProvider(this).get(OverviewViewModel::class.java)
 
@@ -39,6 +40,16 @@ class MovieOverviewFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        setUpRecyclerView()
+
+        setUpListeners()
+
+        setUpObservers()
+
+        return binding.root
+    }
+
+    private fun setUpRecyclerView() {
         movieAdapter = MovieAdapter { movie ->
             val bundle = Bundle()
             bundle.putParcelable(MOVIE_KEY, movie)
@@ -56,13 +67,17 @@ class MovieOverviewFragment : Fragment() {
 
         binding.movieOverviewRecyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.movieOverviewRecyclerView.adapter = movieAdapter
+    }
 
+    private fun setUpListeners() {
         binding.swipeLayout.setOnRefreshListener {
-            viewModel.getMovies()
+            viewModel.refreshMovies()
             binding.swipeLayout.isRefreshing = false
             reloadingNeeded = true
         }
+    }
 
+    private fun setUpObservers() {
         viewModel.movieList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 movieAdapter.updateList(it)
@@ -73,10 +88,9 @@ class MovieOverviewFragment : Fragment() {
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
             it?.let {
                 toggleErrorView(it)
+                reloadingNeeded = true
             }
         })
-
-        return binding.root
     }
 
     private fun toggleErrorView(message: String) {

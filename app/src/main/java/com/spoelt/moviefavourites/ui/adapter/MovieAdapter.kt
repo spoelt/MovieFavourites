@@ -65,7 +65,6 @@ class MovieAdapter(private val clickListener: ClickListener) : RecyclerView.Adap
 
     fun updateList(updatedList: List<Movie>) {
         movieList = updatedList
-        notifyDataSetChanged()
         notifyItemRangeChanged(0, itemCount)
     }
 }
