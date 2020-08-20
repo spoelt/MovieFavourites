@@ -61,7 +61,7 @@ class MovieOverviewFragment : Fragment() {
             }
         })
 
-        binding.movieOverviewRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        binding.movieOverviewRecyclerView.layoutManager = GridLayoutManager(context, 2) 
         binding.movieOverviewRecyclerView.adapter = movieAdapter
     }
 
