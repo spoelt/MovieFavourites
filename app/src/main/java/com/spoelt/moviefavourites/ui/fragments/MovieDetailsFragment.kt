@@ -2,9 +2,7 @@ package com.spoelt.moviefavourites.ui.fragments
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.spoelt.moviefavourites.R
@@ -30,7 +28,13 @@ class MovieDetailsFragment : Fragment() {
         val args = MovieDetailsFragmentArgs.fromBundle(requireArguments())
         displayMovieDetails(args.movie)
 
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_movie_detail, menu)
     }
 
     private fun displayMovieDetails(movie: Movie) {

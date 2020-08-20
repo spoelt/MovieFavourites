@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.spoelt.moviefavourites.R
-import com.spoelt.moviefavourites.constants.MOVIE_KEY
 import com.spoelt.moviefavourites.databinding.FragmentMovieOverviewBinding
 import com.spoelt.moviefavourites.ui.adapter.MovieAdapter
 import com.spoelt.moviefavourites.ui.adapter.OnBottomReachedListener
