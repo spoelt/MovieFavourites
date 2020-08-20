@@ -37,7 +37,7 @@ class MovieDetailsFragment : Fragment() {
     private fun displayMovieDetails(movie: Movie) {
         binding.movieTitleDetail.text = resources.getString(
             R.string.movie_header,
-            movie.original_title,
+            movie.title,
             movie.release_date.substringBefore(DASH)
         )
         binding.movieOverview.text = movie.overview

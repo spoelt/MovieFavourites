@@ -31,7 +31,7 @@ class MovieAdapter(private val clickListener: ClickListener) : RecyclerView.Adap
         private val textViewReleaseYear: TextView = itemView.releaseYear
 
         fun bind(movie: Movie){
-            textViewMovieTitle.text = movie.original_title
+            textViewMovieTitle.text = movie.title
             textViewReleaseYear.text = movie.release_date.substringBefore(DASH)
             Picasso.get()
                 .load("https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}")

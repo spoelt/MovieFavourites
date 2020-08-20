@@ -1,6 +1,7 @@
 package com.spoelt.moviefavourites.ui.viewModel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,8 +17,12 @@ import java.io.IOException
 class OverviewViewModel : ViewModel() {
     private val apiService = ApiClient().getClient().create(ApiService::class.java)
     private var page = 1
-    var errorMessage: MutableLiveData<String> = MutableLiveData()
-    var movieList: MutableLiveData<MutableList<Movie>> = MutableLiveData()
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
+    private val _movieList = MutableLiveData<MutableList<Movie>>()
+    val movieList: LiveData<MutableList<Movie>>
+        get() = _movieList
 
     init {
         getMovies()
@@ -66,7 +71,7 @@ class OverviewViewModel : ViewModel() {
     }
 
     private fun handleError(message: String) {
-        errorMessage.value = message
+        _errorMessage.value = message
     }
 
     private fun fillMovieList(data: JsonResponse) {
@@ -78,14 +83,14 @@ class OverviewViewModel : ViewModel() {
         }
 
         if (page == 1) {
-            movieList.value = list
+            _movieList.value = list
         } else {
-            val existingMovies = movieList.value as ArrayList<Movie>
+            val existingMovies = _movieList.value as ArrayList<Movie>
             existingMovies.addAll(list)
-            movieList.value = existingMovies
+            _movieList.value = existingMovies
         }
 
-        errorMessage.value = ""
+        _errorMessage.value = ""
 
         when (page) {
             MAX_NUM_PAGES -> page = 1

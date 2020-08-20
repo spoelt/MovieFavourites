@@ -25,10 +25,17 @@
         <action
             android:id="@+id/action_favouriteMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_favouriteMoviesFragment_to_movieOverviewFragment"
+            app:destination="@id/movieOverviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
         android:name="com.spoelt.moviefavourites.ui.fragments.MovieDetailsFragment"
         android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" />
+        tools:layout="@layout/fragment_movie_details">
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_movieOverviewFragment"
+            app:destination="@id/movieOverviewFragment" />
+    </fragment>
 </navigation>

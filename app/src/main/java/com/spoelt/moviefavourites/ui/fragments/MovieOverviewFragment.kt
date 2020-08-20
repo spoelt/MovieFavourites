@@ -35,15 +35,11 @@ class MovieOverviewFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_overview, container, false)
 
         viewModel = ViewModelProvider(this).get(OverviewViewModel::class.java)
-
         binding.lifecycleOwner = this
-
         binding.viewModel = viewModel
 
         setUpRecyclerView()
-
         setUpListeners()
-
         setUpObservers()
 
         return binding.root
