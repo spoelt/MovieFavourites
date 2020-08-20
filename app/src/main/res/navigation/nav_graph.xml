@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/movieOverviewFragment"
         android:name="com.spoelt.moviefavourites.ui.fragments.MovieOverviewFragment"
-        android:label="fragment_movie_overview"
-        tools:layout="@layout/fragment_movie_overview" >
+        android:label="Popular Movies"
+        tools:layout="@layout/fragment_movie_overview">
         <action
             android:id="@+id/action_movieOverviewFragment_to_favouriteMoviesFragment"
             app:destination="@id/favouriteMoviesFragment" />
@@ -32,10 +32,13 @@
     <fragment
         android:id="@+id/movieDetailsFragment"
         android:name="com.spoelt.moviefavourites.ui.fragments.MovieDetailsFragment"
-        android:label="fragment_movie_details"
+        android:label="Movie Details"
         tools:layout="@layout/fragment_movie_details">
         <action
             android:id="@+id/action_movieDetailsFragment_to_movieOverviewFragment"
             app:destination="@id/movieOverviewFragment" />
+        <argument
+            android:name="movie"
+            app:argType="com.spoelt.moviefavourites.data.model.Movie" />
     </fragment>
 </navigation>

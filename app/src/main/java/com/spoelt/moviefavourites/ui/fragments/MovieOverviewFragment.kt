@@ -11,7 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.spoelt.moviefavourites.R
 import com.spoelt.moviefavourites.constants.MOVIE_KEY
@@ -47,9 +47,11 @@ class MovieOverviewFragment : Fragment() {
 
     private fun setUpRecyclerView() {
         movieAdapter = MovieAdapter { movie ->
-            val bundle = Bundle()
-            bundle.putParcelable(MOVIE_KEY, movie)
-            findNavController().navigate(R.id.movieDetailsFragment, bundle)
+            val action =
+                MovieOverviewFragmentDirections.actionMovieOverviewFragmentToMovieDetailsFragment(
+                    movie
+                )
+            view?.findNavController()?.navigate(action)
         }
 
         movieAdapter.setOnBottomReachedListener(object : OnBottomReachedListener {
@@ -61,7 +63,7 @@ class MovieOverviewFragment : Fragment() {
             }
         })
 
-        binding.movieOverviewRecyclerView.layoutManager = GridLayoutManager(context, 2) 
+        binding.movieOverviewRecyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.movieOverviewRecyclerView.adapter = movieAdapter
     }
 

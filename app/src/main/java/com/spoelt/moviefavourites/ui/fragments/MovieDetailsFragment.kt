@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.spoelt.moviefavourites.R
 import com.spoelt.moviefavourites.constants.DASH
-import com.spoelt.moviefavourites.constants.MOVIE_KEY
 import com.spoelt.moviefavourites.data.model.Movie
 import com.spoelt.moviefavourites.databinding.FragmentMovieDetailsBinding
 import com.squareup.picasso.MemoryPolicy
@@ -28,8 +27,8 @@ class MovieDetailsFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        val movie = arguments?.getParcelable<Movie>(MOVIE_KEY)
-        movie?.let { displayMovieDetails(it) }
+        val args = MovieDetailsFragmentArgs.fromBundle(requireArguments())
+        displayMovieDetails(args.movie)
 
         return binding.root
     }
