@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 def apikeyPropertiesFile = rootProject.file("apikey.properties")
@@ -35,6 +37,12 @@ android {
 dependencies {
     def nav_version = "2.3.0-beta01"
     def mat_version = "1.3.0-alpha01"
+    def room_version = "2.2.5"
+    def lifecycle_ex_version = "2.2.0"
+    def lifecycle_rt_vm_version = "2.3.0-alpha03"
+    def retrofit_version = "2.6.1"
+    def okhttp3_version = "4.0.1"
+    def picasso_version = "2.71828"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -54,15 +62,22 @@ dependencies {
     implementation "com.google.android.material:material:$mat_version"
 
     // LifeCycle
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation "androidx.lifecycle:lifecycle-runtime:2.3.0-alpha03"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha03"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_ex_version"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_rt_vm_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_rt_vm_version"
 
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.6.1"
-    implementation "com.squareup.retrofit2:converter-gson:2.6.1"
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.0.1'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
 
     // Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    // Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
 }
