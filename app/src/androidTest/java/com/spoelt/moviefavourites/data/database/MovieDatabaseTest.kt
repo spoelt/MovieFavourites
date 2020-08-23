@@ -16,6 +16,7 @@ import java.io.IOException
 class MovieDatabaseTest {
     private lateinit var movieDao: MovieDao
     private lateinit var db: MovieDatabase
+    private val PROJECT_POWER = "Project Power"
 
     @Before
     fun createDb() {
@@ -37,13 +38,48 @@ class MovieDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetNight() {
-        val movie = Movie(
+    fun insertMovie_movieReturned() {
+        // Arrange
+        val movie = createMovie()
+        // Act
+        movieDao.insert(movie)
+        val specificMovie = movieDao.getMovie(movie.id)
+        // Assert
+        assertEquals(specificMovie?.title, PROJECT_POWER)
+    }
+
+    @Test
+    fun deleteMovie_nullReturned() {
+        // Arrange
+        val movie = createMovie()
+        movieDao.insert(movie)
+        // Act
+        movieDao.delete(movie)
+        val retrievedMovie = movieDao.getMovie(movie.id)
+        // Assert
+        assertEquals(retrievedMovie, null)
+    }
+
+    @Test
+    fun insertMovies_listOfMoviesReturned() {
+        // Arrange
+        val movies = createMovieList()
+        movies.forEach {
+            movieDao.insert(it)
+        }
+        // Act
+        val existingMovies = movieDao.getAllMovies()
+        // Assert
+        assert(existingMovies.value == movies.sortedWith(compareBy({ it.id }, { it.id })))
+    }
+
+    private fun createMovie(): Movie {
+        return Movie(
             popularity = 269.671,
             vote_count = 523,
             video = false,
             poster_path = "/bOKjzWDxiDkgEQznhzP4kdeAHNI.jpg",
-            id = 605116,
+            id = (0..999999).random(),
             adult = false,
             backdrop_path = "/qVygtf2vU15L2yKS4Ke44U4oMdD.jpg",
             original_language = "en",
@@ -53,8 +89,14 @@ class MovieDatabaseTest {
             overview = "Test OverView",
             release_date = "2020-08-14"
         )
-        movieDao.insert(movie)
-        val specificMovie = movieDao.getMovie(movie.id)
-        assertEquals(specificMovie?.title, "Project Power")
+    }
+
+    private fun createMovieList(): List<Movie> {
+        val movieList = ArrayList<Movie>()
+
+        for (x in 0..5) {
+            movieList.add(createMovie())
+        }
+        return movieList
     }
 }
