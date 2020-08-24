@@ -5,4 +5,6 @@
     <string name="movie_header">%1$s (%2$s)</string>
     <string name="save_as_favourite_content_description">Add to Favourites Button</string>
     <string name="save_as_favourite">Add To Favourites</string>
+    <string name="favourite_movies">My Favourite Movies</string>
+    <string name="popular_movies">Popular Movies</string>
 </resources>

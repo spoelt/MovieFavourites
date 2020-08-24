@@ -20,8 +20,8 @@
     <fragment
         android:id="@+id/favouriteMoviesFragment"
         android:name="com.spoelt.moviefavourites.ui.fragments.FavouriteMoviesFragment"
-        android:label="fragment_favourite_movies"
-        tools:layout="@layout/fragment_favourite_movies" >
+        android:label="Favourite Movies"
+        tools:layout="@layout/fragment_favourite_movies">
         <action
             android:id="@+id/action_favouriteMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />

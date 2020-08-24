@@ -43,6 +43,7 @@ dependencies {
     def retrofit_version = "2.6.1"
     def okhttp3_version = "4.0.1"
     def picasso_version = "2.71828"
+    def coroutines_version = "1.0.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -80,4 +81,8 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 }
