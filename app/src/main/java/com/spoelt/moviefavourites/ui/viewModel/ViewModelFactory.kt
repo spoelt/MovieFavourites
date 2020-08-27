@@ -15,7 +15,7 @@ class ViewModelFactory(
             return MovieDetailsViewModel(dataSource, application) as T
         }
         if (modelClass.isAssignableFrom(FavouritesViewModel::class.java)) {
-            return FavouritesViewModel(dataSource, application) as T
+            return FavouritesViewModel(dataSource) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

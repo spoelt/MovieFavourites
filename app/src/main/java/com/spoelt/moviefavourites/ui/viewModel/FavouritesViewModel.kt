@@ -1,10 +1,8 @@
 package com.spoelt.moviefavourites.ui.viewModel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.spoelt.moviefavourites.data.database.MovieDao
 
-class FavouritesViewModel(val database: MovieDao, application: Application) :
-    AndroidViewModel(application) {
+class FavouritesViewModel(val database: MovieDao) : ViewModel() {
     val favouriteMovies = database.getAllMovies()
 }
