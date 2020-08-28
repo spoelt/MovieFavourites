@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.spoelt.moviefavourites.R
 import com.spoelt.moviefavourites.data.database.MovieDatabase
+import com.spoelt.moviefavourites.data.model.Movie
 import com.spoelt.moviefavourites.databinding.FragmentFavouriteMoviesBinding
 import com.spoelt.moviefavourites.ui.adapter.FavouriteMoviesAdapter
 import com.spoelt.moviefavourites.ui.viewModel.FavouritesViewModel
@@ -20,7 +21,7 @@ import com.spoelt.moviefavourites.ui.viewModel.ViewModelFactory
 /**
  * A simple [Fragment] subclass.
  */
-class FavouriteMoviesFragment : Fragment() {
+class FavouriteMoviesFragment : Fragment(), FavouriteMoviesAdapter.OnMovieClickListener {
     private lateinit var viewModel: FavouritesViewModel
     private lateinit var favouriteMoviesAdapter: FavouriteMoviesAdapter
     private lateinit var binding: FragmentFavouriteMoviesBinding
@@ -33,7 +34,6 @@ class FavouriteMoviesFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_favourite_movies, container, false)
         binding.lifecycleOwner = this
 
-        setUpRecyclerView()
         setUpViewModel()
         setUpObserver()
 
@@ -51,22 +51,24 @@ class FavouriteMoviesFragment : Fragment() {
             ).get(FavouritesViewModel::class.java)
     }
 
-    private fun setUpRecyclerView() {
-        favouriteMoviesAdapter = FavouriteMoviesAdapter { movie ->
-            val action =
-                FavouriteMoviesFragmentDirections.actionFavouriteMoviesFragmentToMovieDetailsFragment(
-                    movie
-                )
-            view?.findNavController()?.navigate(action)
-        }
+    private fun setUpObserver() {
+        viewModel.favouriteMovies.observe(viewLifecycleOwner, Observer {
+            it?.let { movies ->
+                setUpRecyclerView(movies)
+            }
+        })
+    }
+
+    private fun setUpRecyclerView(movieList: List<Movie>) {
+        favouriteMoviesAdapter = FavouriteMoviesAdapter(movieList, this)
         binding.movieOverviewRecyclerView.adapter = favouriteMoviesAdapter
     }
 
-    private fun setUpObserver() {
-        viewModel.favouriteMovies.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                favouriteMoviesAdapter.updateList(it)
-            }
-        })
+    override fun onItemClick(movie: Movie) {
+        val action =
+            FavouriteMoviesFragmentDirections.actionFavouriteMoviesFragmentToMovieDetailsFragment(
+                movie
+            )
+        view?.findNavController()?.navigate(action)
     }
 }

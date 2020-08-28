@@ -5,7 +5,7 @@
     <item
         android:id="@+id/saveAsFavourite"
         android:contentDescription="@string/save_as_favourite_content_description"
-        android:icon="@drawable/save_as_favourite_white_18dp"
+        android:icon="@drawable/saved_as_favourite_white_18dp"
         android:title="@string/save_as_favourite"
         app:showAsAction="always" />
 

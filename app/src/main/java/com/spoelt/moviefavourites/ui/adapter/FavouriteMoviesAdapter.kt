@@ -10,21 +10,21 @@ import com.spoelt.moviefavourites.constants.DASH
 import com.spoelt.moviefavourites.data.model.Movie
 import kotlinx.android.synthetic.main.movie_layout.view.*
 
-class FavouriteMoviesAdapter(private val clickListener: ClickListener) :
+class FavouriteMoviesAdapter(val movies: List<Movie>, val clickListener: OnMovieClickListener) :
     RecyclerView.Adapter<FavouriteMoviesAdapter.FavouriteMoviesViewHolder>() {
-    private var favouriteMoviesList: List<Movie> = ArrayList()
+    private var favouriteMoviesList: List<Movie> = ArrayList(movies)
 
-    class FavouriteMoviesViewHolder(itemView: View, private val clickListener: ClickListener) :
+    class FavouriteMoviesViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         private val textViewMovieTitle: TextView = itemView.movieTitle
         private val textViewReleaseYear: TextView = itemView.releaseYear
 
-        fun bind(movie: Movie) {
+        fun bind(movie: Movie, action: OnMovieClickListener) {
             textViewMovieTitle.text = movie.title
             textViewReleaseYear.text = movie.release_date.substringBefore(DASH)
 
             itemView.setOnClickListener {
-                clickListener(movie)
+                action.onItemClick(movie)
             }
         }
     }
@@ -32,17 +32,16 @@ class FavouriteMoviesAdapter(private val clickListener: ClickListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteMoviesViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.favourite_layout, parent, false)
-        return FavouriteMoviesViewHolder(itemView, clickListener)
+        return FavouriteMoviesViewHolder(itemView)
     }
 
     override fun getItemCount(): Int = favouriteMoviesList.size
 
     override fun onBindViewHolder(holder: FavouriteMoviesViewHolder, position: Int) {
-        holder.bind(favouriteMoviesList[position])
+        holder.bind(favouriteMoviesList.get(position), clickListener)
     }
 
-    fun updateList(updatedList: List<Movie>) {
-        favouriteMoviesList = updatedList
-        notifyItemRangeChanged(0, itemCount)
+    interface OnMovieClickListener {
+        fun onItemClick(movie: Movie)
     }
 }
