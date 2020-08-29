@@ -8,25 +8,39 @@
     android:paddingTop="@dimen/padding"
     android:paddingEnd="@dimen/padding">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/moviePoster"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/image_description_poster"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <TextView
         android:id="@+id/movieTitle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding"
+        android:paddingEnd="@dimen/padding"
         android:text=""
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moviePoster"
+        app:layout_constraintStart_toEndOf="@+id/moviePoster"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Equilibrium" />
 
     <TextView
         android:id="@+id/releaseYear"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding"
+        android:paddingEnd="@dimen/padding"
         android:text=""
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/moviePoster"
         app:layout_constraintTop_toBottomOf="@+id/movieTitle"
         tools:text="2002" />
 
