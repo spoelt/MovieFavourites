@@ -3,4 +3,11 @@
     <string name="image_description_poster">Movie Poster</string>
     <string name="tmdb_notice">This product uses the TMDb API but is not endorsed or certified by TMDb.</string>
     <string name="movie_header">%1$s (%2$s)</string>
+    <string name="save_as_favourite_content_description">Add to Favourites Button</string>
+    <string name="save_as_favourite">Add To Favourites</string>
+    <string name="favourite_movies">My Favourite Movies</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="movie_added">Successfully added %1$s to Favourites</string>
+    <string name="movie_removed">Successfully removed %1$s from Favourites</string>
+    <string name="no_favourites_yet">No favourites yet :(</string>
 </resources>

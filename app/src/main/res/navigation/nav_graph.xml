@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/movieOverviewFragment"
         android:name="com.spoelt.moviefavourites.ui.fragments.MovieOverviewFragment"
-        android:label="fragment_movie_overview"
-        tools:layout="@layout/fragment_movie_overview" >
+        android:label="Popular Movies"
+        tools:layout="@layout/fragment_movie_overview">
         <action
             android:id="@+id/action_movieOverviewFragment_to_favouriteMoviesFragment"
             app:destination="@id/favouriteMoviesFragment" />
@@ -20,15 +20,25 @@
     <fragment
         android:id="@+id/favouriteMoviesFragment"
         android:name="com.spoelt.moviefavourites.ui.fragments.FavouriteMoviesFragment"
-        android:label="fragment_favourite_movies"
-        tools:layout="@layout/fragment_favourite_movies" >
+        android:label="Favourite Movies"
+        tools:layout="@layout/fragment_favourite_movies">
         <action
             android:id="@+id/action_favouriteMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_favouriteMoviesFragment_to_movieOverviewFragment"
+            app:destination="@id/movieOverviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
         android:name="com.spoelt.moviefavourites.ui.fragments.MovieDetailsFragment"
-        android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" />
+        android:label="Movie Details"
+        tools:layout="@layout/fragment_movie_details">
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_movieOverviewFragment"
+            app:destination="@id/movieOverviewFragment" />
+        <argument
+            android:name="movie"
+            app:argType="com.spoelt.moviefavourites.data.model.Movie" />
+    </fragment>
 </navigation>
