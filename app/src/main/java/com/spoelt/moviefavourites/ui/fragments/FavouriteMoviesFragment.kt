@@ -55,6 +55,7 @@ class FavouriteMoviesFragment : Fragment(), FavouriteMoviesAdapter.OnMovieClickL
         viewModel.favouriteMovies.observe(viewLifecycleOwner, Observer {
             it?.let { movies ->
                 setUpRecyclerView(movies)
+                toggleErrorView(movies)
             }
         })
     }
@@ -62,6 +63,14 @@ class FavouriteMoviesFragment : Fragment(), FavouriteMoviesAdapter.OnMovieClickL
     private fun setUpRecyclerView(movieList: List<Movie>) {
         favouriteMoviesAdapter = FavouriteMoviesAdapter(movieList, this)
         binding.movieOverviewRecyclerView.adapter = favouriteMoviesAdapter
+    }
+
+    private fun toggleErrorView(movies: List<Movie>) {
+        if (movies.isEmpty()) {
+            binding.errorMessage.visibility = View.VISIBLE
+        } else {
+            binding.errorMessage.visibility = View.GONE
+        }
     }
 
     override fun onItemClick(movie: Movie) {

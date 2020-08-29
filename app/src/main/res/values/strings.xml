@@ -7,6 +7,7 @@
     <string name="save_as_favourite">Add To Favourites</string>
     <string name="favourite_movies">My Favourite Movies</string>
     <string name="popular_movies">Popular Movies</string>
-    <string name="movie_added">Movie successfully added to Favourites</string>
-    <string name="movie_removed">Movie successfully removed from Favourites</string>
+    <string name="movie_added">Successfully added %1$s to Favourites</string>
+    <string name="movie_removed">Successfully removed %1$s from Favourites</string>
+    <string name="no_favourites_yet">No favourites yet :(</string>
 </resources>
