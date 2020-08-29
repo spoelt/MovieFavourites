@@ -14,23 +14,18 @@ import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.movie_layout.view.*
 
-typealias ClickListener = (Movie) -> Unit
-
-class MovieAdapter(private val clickListener: ClickListener) : RecyclerView.Adapter<MovieAdapter.MoviesViewHolder>() {
+class MovieAdapter(val clickListener: OnMovieClickListener) :
+    RecyclerView.Adapter<MovieAdapter.MoviesViewHolder>() {
     private var movieList: List<Movie> = ArrayList()
     private lateinit var onBottomReachedListener: OnBottomReachedListener
 
-    fun setOnBottomReachedListener(listener: OnBottomReachedListener) {
-        onBottomReachedListener = listener
-    }
-
-    class MoviesViewHolder(itemView: View, private val clickListener: ClickListener) :
+    class MoviesViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         private val imageViewMoviePoster: ImageView = itemView.moviePoster
         private val textViewMovieTitle: TextView = itemView.movieTitle
         private val textViewReleaseYear: TextView = itemView.releaseYear
 
-        fun bind(movie: Movie){
+        fun bind(movie: Movie, action: OnMovieClickListener) {
             textViewMovieTitle.text = movie.title
             textViewReleaseYear.text = movie.release_date.substringBefore(DASH)
             Picasso.get()
@@ -42,7 +37,7 @@ class MovieAdapter(private val clickListener: ClickListener) : RecyclerView.Adap
                 .into(imageViewMoviePoster)
 
             itemView.setOnClickListener {
-                clickListener(movie)
+                action.onItemClick(movie)
             }
         }
     }
@@ -50,22 +45,30 @@ class MovieAdapter(private val clickListener: ClickListener) : RecyclerView.Adap
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.movie_layout, parent, false)
-        return MoviesViewHolder(itemView, clickListener)
+        return MoviesViewHolder(itemView)
     }
 
     override fun getItemCount(): Int = movieList.size
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        holder.bind(movieList[position])
+        holder.bind(movieList.get(position), clickListener)
 
         if (position == movieList.size - 1) {
             onBottomReachedListener.onBottomReached(position)
         }
     }
 
+    fun setOnBottomReachedListener(listener: OnBottomReachedListener) {
+        onBottomReachedListener = listener
+    }
+
     fun updateList(updatedList: List<Movie>) {
         movieList = updatedList
         notifyItemRangeChanged(0, itemCount)
+    }
+
+    interface OnMovieClickListener {
+        fun onItemClick(movie: Movie)
     }
 }
 
