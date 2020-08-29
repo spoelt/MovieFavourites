@@ -3,8 +3,10 @@ package com.spoelt.moviefavourites.ui.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.spoelt.moviefavourites.R
 import com.spoelt.moviefavourites.constants.DASH
@@ -21,6 +23,7 @@ class MovieDetailsFragment : Fragment() {
     private lateinit var binding: FragmentMovieDetailsBinding
     private lateinit var detailsViewModel: MovieDetailsViewModel
     private lateinit var args: MovieDetailsFragmentArgs
+    private var movieInDb = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,11 +53,9 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun setUpObserver() {
-/*        detailsViewModel.currentMovie.observe(viewLifecycleOwner, Observer {
-            if (it.title.isNotBlank()) {
-                // change button in menu
-            }
-        })*/
+        detailsViewModel.favouriteMovies.observe(viewLifecycleOwner, Observer {
+            movieInDb = it.contains(args.movie)
+        })
     }
 
     private fun handlePassedData() {
@@ -82,17 +83,29 @@ class MovieDetailsFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_movie_detail, menu)
-        // check if movie already in DB
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.saveAsFavourite -> {
-                detailsViewModel.saveMovieAsFavourite(args.movie)
-                item.icon = resources.getDrawable(R.drawable.saved_as_favourite_white_18dp)
+                if (movieInDb) {
+                    detailsViewModel.deleteMovieFromFavourites(args.movie)
+                } else {
+                    detailsViewModel.saveMovieAsFavourite(args.movie)
+                }
+                displayMessage(args.movie.title, movieInDb)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun displayMessage(title: String, movieFavourited: Boolean) {
+        val stringId: Int = when (movieFavourited) {
+            true -> R.string.movie_removed
+            else -> R.string.movie_added
+        }
+        Toast.makeText(context, resources.getString(stringId, title), Toast.LENGTH_SHORT)
+            .show()
     }
 }
